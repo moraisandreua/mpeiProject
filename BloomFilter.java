@@ -25,36 +25,33 @@ public class BloomFilter {
 	
 	// incializar filtro com zeros
 	public void inicializar(int n) {
-		HashFunction h=new HashFunction(this.k);
+		HashFunction h = new HashFunction(this.k, this.n);
 		// vector e como se fosse um array dinamico
 		this.bloom=new int[n];
 		
 		
 	}
-	
-	// T-tipo generico
-	// desta forma posso passar qualquer tipo de argumento(objeto) à função
-	public void adicionarElemento(String palavra,int k ){
-		
-		int[] pos;;
-		pos=h.HashCode(palavra);
-		
+
+	public void adicionarElemento(String palavra,int k){
+
+		double[] pos = h.HashCode(palavra);
+
 		for(int i=0;i<this.k;i++) {
 			if(!membro(palavra))
-			this.bloom[pos[i]]=1;
+			this.bloom[(int)pos[i]]=1;
 		}
 		
 	}
 	
 	// testa se o elemento existe no filtro
 	public boolean membro(String palavra) {
-		
+
+		double[] pos= h.HashCode(palavra);
 		boolean retval=true;
-		int[] pos;;
-		pos=h.HashCode(palavra);
+
 	for(int i=0;i<this.k;i++) {
 			
-		if(this.bloom[pos[i]]==0) 
+		if(this.bloom[(int)pos[i]]==0)
 			retval=false;
 		}
 		return retval;

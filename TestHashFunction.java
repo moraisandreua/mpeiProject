@@ -3,64 +3,86 @@ package projeto;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 
 public class TestHashFunction {
 
 public static void main(String[] args) {
-	String[] TempItens= new String[5];
-	TempItens=readItens();
-		
-	String[] TempUsers= new String[5];
-	TempUsers=readUsers();
+//	String[] TempItens= new String[5];
+//	TempItens=readItens();
+//
+//	String[] TempUsers= new String[5];
+//	TempUsers=readUsers();
 
-	int[][] b1=new int[6][86562];
+	HashMap<Double,Integer>h=new HashMap<>();
+	double[][] b1=new double[100000][6];
 
-	double[] h= new double[6];
+//	double[] h= new double[6];
 		
-	HashFunction hk = new HashFunction(6,86562);
-		
-	// gerar 100 chaves pseudo aleatorias
-		
-	for(int i=0;i<10000;i++) {
-		
-		hk.HashCode(geraString());
-		
-		for(int j=0;j<6;i++) {
-			
-			b1[j][(int)h[j]]+=1;
+HashFunction hk = new HashFunction(6);
+
+	String[] key=new String[10000];
+	int ll=key.length;
+
+	for(int i=0;i<ll;i++) {
+		// gerar 100000 chaves pseudo aleatorias
+
+		key[i] = geraString();
+		b1[i]=hk.HashCode(key[i]);
+
+	}
+
+
+	for(int col=0;col<6;col++){
+
+		for (int line=0;line<ll;line++){
+
+			if(!h.containsKey(b1[line][col]))
+				h.put(b1[line][col],1);
+			else
+				h.put(b1[line][col],h.get(b1[line][col])+1);
 		}
-			
+
+		Iterator<Map.Entry<Double,Integer>> itr=h.entrySet().iterator();
+
+		while (itr.hasNext()){
+			Map.Entry<Double,Integer> entry=itr.next();
+			writeData("hist"+col+".csv",entry.getKey(),entry.getValue());
+		}
+
+		h.clear();
 	}
-	
-	for(int i=0;i<6;i++) {
-		
-		writeData("hist"+i+".csv",b1[i]);
-		
-	}
+
+//	for(int i=0;i<6;i++) {
+//
+//		writeData("hist"+i+".csv",b1[i]);
+//
+//	}
 	
 }
 	
-public static void writeData(String path,int[] d) {
+public static void writeData(String path,double key,int value) {
 	
 	
-	int ll=d.length;
+
 	try {
-		FileWriter outputfile = new FileWriter(path);
+
+		FileWriter outputfile = new FileWriter(path,true);
 		PrintWriter p = new PrintWriter(outputfile);
 		
-		for(int i=0;i<ll;i++) {
-			
-			p.printf("%d ",i);
-			p.println(d[i]);
-			p.close();
-		}
+
+			p.printf(" %.1f \t,%d\n",key,value);
+
+		p.close();
 		
 	}catch(IOException e) {
 		
 		System.out.printf("Erro ao ler ficheiro\n");
 	}
-	
+
 	
 }
 	
@@ -74,7 +96,7 @@ public static String geraString() {
 		int tamanho;
 		int pos;
 		
-		tamanho=rand.nextInt(10);
+		tamanho=rand.nextInt(10)+1;
 			
 		StringBuilder s=new StringBuilder();
 		
@@ -96,43 +118,43 @@ public static String geraString() {
 		
 		return temp;
 	}
-	
-	public static String[] readItens() throws IOException {
-		String[] itens= new String[5];
-		Path currentRelativePath = Paths.get("");
-		String s = currentRelativePath.toAbsolutePath().toString();
-		File file = new File(s+"/src/teste/itens.txt"); 
-		BufferedReader br = new BufferedReader(new FileReader(file)); 
-		String st; 
-		int c=0;
-		while ((st = br.readLine()) != null) {
-			if(itens.length <= c) {
-				itens=resizeArray(itens, 2);
-			}
-			itens[c]=st;
-			c++;
-		}
-		return itens;
-	}
-	
-	public static String[] readUsers() throws IOException {
-		String[] users= new String[5];
-		Path currentRelativePath = Paths.get("");
-		String s = currentRelativePath.toAbsolutePath().toString();
-		File file = new File(s+"/src/teste/users.txt"); 
-		BufferedReader br = new BufferedReader(new FileReader(file)); 
-		String st; 
-		int c=0;
-		while ((st = br.readLine()) != null) {
-			if(users.length <= c) {
-				users=resizeArray(users, 2);
-			}
-			users[c]=st;
-			c++;
-		}
-		return users;
-	}
-	
+//
+//	public static String[] readItens() throws IOException {
+//		String[] itens= new String[5];
+//		Path currentRelativePath = Paths.get("");
+//		String s = currentRelativePath.toAbsolutePath().toString();
+//		File file = new File(s+"/src/teste/itens.txt");
+//		BufferedReader br = new BufferedReader(new FileReader(file));
+//		String st;
+//		int c=0;
+//		while ((st = br.readLine()) != null) {
+//			if(itens.length <= c) {
+//				itens=resizeArray(itens, 2);
+//			}
+//			itens[c]=st;
+//			c++;
+//		}
+//		return itens;
+//	}
+//
+//	public static String[] readUsers() throws IOException {
+//		String[] users= new String[5];
+//		Path currentRelativePath = Paths.get("");
+//		String s = currentRelativePath.toAbsolutePath().toString();
+//		File file = new File(s+"/src/teste/users.txt");
+//		BufferedReader br = new BufferedReader(new FileReader(file));
+//		String st;
+//		int c=0;
+//		while ((st = br.readLine()) != null) {
+//			if(users.length <= c) {
+//				users=resizeArray(users, 2);
+//			}
+//			users[c]=st;
+//			c++;
+//		}
+//		return users;
+//	}
+//
 }
 	
 	
