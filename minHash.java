@@ -3,8 +3,7 @@ package projeto;
 /*TODO:aplicar lhs*/
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 public class minHash {
 //	public int hashFunction(String a, int m) {
@@ -17,39 +16,51 @@ public class minHash {
 	private int k;// numero de hash functions
 	private HashFunction h;// hashfunction
 	private int[][] signatures;// assinaturas
-	private HashMap<String, ArrayList<Integer>>  dados;// set com os dados de cada utilizador
+	private HashMap<String, ArrayList<String>>  dados;// set com os dados de cada utilizador
 
 	// construtor
-	public minHash(int k, HashMap<String, ArrayList<Integer>> dados) {
+	public minHash(int k, HashMap<String, ArrayList<String>> dados) {
 		this.k=k;
 		this.h = new HashFunction(k);
 		this.dados = dados;
 		minHash();
 
 	}
-// calcula a minhash
+	// calcula a minhash
 	public void minHash() {
 
-		int ll=dados.keySet().size(); // numero de users
-		this.signatures =new int[this.k][ll];
+		int ll=dados.keySet().size();
+		this.signatures =new int[ll][this.k];
 		int[]hk;
+		int user=0;
+
+
+		Iterator<Map.Entry<String, ArrayList<String>>> itr=dados.entrySet().iterator();
+		while(itr.hasNext()){
+
+				signatures[user]=h.minHashode(itr.next().getValue());
+
+			user++;
+		}
+
 
 		for (int i=0;i<ll;i++){
-			
-				int min=-1;
-
-				for(int l=0;l<dados.values().size();l++){
 
 
+//			int min=h.hashCode(dados.get());
+			for(int l=1;l<dados.values().size();l++){
 
-				}
+
+
+			}
 
 
 		}
 
 
-
 	}
-	
-	
+
+	public int[][] getSignatures() {
+		return signatures;
+	}
 }
