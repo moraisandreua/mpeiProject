@@ -1,0 +1,18 @@
+UserA->Banana
+UserB->Abacaxi
+UserC->Corvina
+UserD->Bacalhau
+UserE->Ariel A+
+UserF->Bife Traseiro
+UserA->Limão
+UserB->Melão
+UserC->Alho Francês
+UserD->Feijão
+UserE->Miolo de Nós
+UserF->Bola de Carne
+UserA->Tâmaros
+UserB->Bolo de Arroz
+UserC->Bolo Red Velvet
+UserD->Damascos
+UserE->Bife Traseiro
+UserF->Ariel A+
