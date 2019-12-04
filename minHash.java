@@ -16,10 +16,18 @@ public class minHash {
 	private int k;// numero de hash functions
 	private HashFunction h;// hashfunction
 	private int[][] signatures;// assinaturas
-	private HashMap<String, ArrayList<String>>  dados;// set com os dados de cada utilizador
+	private Map<String, ArrayList<String>>  dados;// set com os dados de cada utilizador
 
 	// construtor
 	public minHash(int k, HashMap<String, ArrayList<String>> dados) {
+		this.k=k;
+		this.h = new HashFunction(k);
+		this.dados = dados;
+		minHash();
+
+	}
+	
+	public minHash(int k, Hashtable<String, ArrayList<String>> dados) {
 		this.k=k;
 		this.h = new HashFunction(k);
 		this.dados = dados;
@@ -47,8 +55,6 @@ public class minHash {
 
 
 	public void addElements(String user,ArrayList<String> key){
-
-
 		if(this.dados.containsKey(user)) {
 			this.dados.get(user).addAll(key);
 		}
