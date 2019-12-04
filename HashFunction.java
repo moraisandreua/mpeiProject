@@ -1,16 +1,17 @@
 package projeto;
 
-import java.util.Random; 
+import java.util.ArrayList;
+import java.util.Random;
 
 public class HashFunction {
 	
 
 	private int n;// tamanho bloom filter/min hash
 	private int k; // numero de hash functions
-	private double p; // numero primo
-	private double[] a;
-	private double[] b;
-	private double[] c;// vetor de numeros aleatorios
+	private int p; // numero primo
+	private int[] a;
+	private int[] b;
+//	private int[] c;// vetor de numeros aleatorios
 	
 	// construtores
 
@@ -37,24 +38,27 @@ public class HashFunction {
 		
 
 		// gerar vetores aleatorios
-		this.a=new double[this.k];
-		this.b=new double[this.k];
-		this.c=new double[this.k];
-		
+		this.a=new int[this.k];
+		this.b=new int[this.k];
+//		this.c=new int[this.k];
+
+
+		Random r= new Random();
 		for(int i=0;i<this.k;i++) {
 			
-			a[i]=Math.random()*(this.p-2)+1;;// a[i]=[1,(p-1)]
-			b[i]=Math.random()*(this.p-1);// b[i]=[0,(p-1)]
-			c[i]=Math.random()*(this.p-2)+1;;// c[i]=[1,(p-1)]
+			a[i]=r.nextInt(this.p-1);;// a[i]=[1,(p-1)]
+			b[i]=r.nextInt(this.p-1);// b[i]=[0,(p-1)]
+//			c[i]=r.nextInt(this.p-2)+1;;// c[i]=[1,(p-1)]
 						
 			}
 		}
 	
 	// devolve um numero primo grande
-	private double getPrime() {
+	private int getPrime() {
 		
-		int ff=1000;
-		double pp=  (ff * (this.n + 1.76));
+//		int ff=1000;
+//		double pp=  (ff * (this.n + 1.76));
+		int pp=1000001;
 		// tornar o numero impar
 		if(pp%2==0) {
 			pp++;
@@ -83,30 +87,53 @@ public class HashFunction {
 
 		int[] hk=new int[this.k];// hash code
 		int tamanho=chave.length();// tamanho string
-		double[] key=stringToDouble(chave,tamanho);// string convertida em double
+		int[] key=stringToInt(chave,tamanho);// string convertida em double
 
 		for (int j=0;j<this.k;j++) {
 
-		hk[j]=(int)key[0]; // se so tiver uma entrada
+		 // se so tiver uma entrada
 
-		for (int i=1;i<tamanho;i++) {
+		for (int i=0;i<tamanho;i++) {
 			// devolve apenas o hash code
-			hk[j] =(int)(( this.c[j] * hk[j] + key[i] )% this.p);
+			hk[j] =hk[j]+(( this.a[j] * key[i] + this.b[j])% this.p);
 
 
 		}
+
 		// se quiser converter o hash code num posição
-			hk[j] = (int)  ( ( ( ( ( this.a[j]) * hk[j] + this.b[j] ) % this.p) % this.n) );
+			if(n!=0)
+				hk[j] = ( hk[j] % this.n );
 
 		}
 
 		return hk;
 
 	}
-	
-	public double[] stringToDouble(String s,int tamanho) {
 
-		double[] keys=new double[tamanho];// array com as chaves
+	public int[] minHashode(ArrayList<String> items){
+
+		int[] hk;
+		int[] min= HashCode(items.get(0));
+
+		for(int i=1;i<items.size();i++){
+
+			hk=HashCode(items.get(i));
+
+			for(int j=0;j<hk.length;j++){
+
+				if(hk[j]<min[j])
+					min[j]=hk[j];
+
+			}
+
+		}
+		return min;
+	}
+
+
+	public int[] stringToInt(String s,int tamanho) {
+
+		int[] keys=new int[tamanho];// array com as chaves
 		int c;// caracter da string
 		
 		for(int i=0;i<tamanho;i++) {	
@@ -116,6 +143,14 @@ public class HashFunction {
 		
 		return keys;
 	}
-	
-	
+
+	public int[] getA() {
+		return a;
+	}
+
+
+
+	public int[] getB() {
+		return b;
+	}
 }

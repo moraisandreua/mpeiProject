@@ -15,22 +15,24 @@ public class TestMinHash {
 
 HashMap<String, ArrayList<String>> dados;
 dados= readFile("tags.csv");
+ArrayList<String>s =new ArrayList<>();
+s.add("60756");
+s.add("89774");
 
-minHash m=new minHash(4,dados);
 
 
 
-int [][] sig=m.getSignatures();
+minHash m=new minHash(10,dados);
 
-for(int i=0;i<sig.length;i++){
-    System.out.printf("user%d\t",i);
-    for (int j=0;j<4;j++){
+m.PrintSignatures();
 
-        System.out.printf("%5d ",sig[i][j]);
-    }
-System.out.println();
-}
+System.out.printf("-----------------------------------------------\n");
+m.addElements("7",s);
 
+
+m.PrintSignatures();
+double sim=m.Similaridade(0,1);
+System.out.printf("A similaridade é de: %f\n",sim);
 }
 
 
@@ -56,6 +58,7 @@ public static  HashMap<String, ArrayList<String>> readFile(String fileName){
                d.put(dados[0], new ArrayList<>());
                d.get(dados[0]).add(dados[1]) ;
            }
+           break;
 
         }
         sc.close();

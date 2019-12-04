@@ -16,13 +16,13 @@ public static void main(String[] args) {
 //	TempUsers=readUsers();
 
 	HashMap<Double,Integer>h=new HashMap<>();
-	int[][] b1=new int[100000][6];
+	int[][] b1=new int[1000000][10];
 
 //	double[] h= new double[6];
 		
-HashFunction hk = new HashFunction(6,100000);
+HashFunction hk = new HashFunction(10,1000000);
 
-	String[] key=new String[100000];
+	String[] key=new String[1000000];
 	int ll=key.length;
 
 	for(int i=0;i<ll;i++) {

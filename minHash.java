@@ -43,21 +43,50 @@ public class minHash {
 			user++;
 		}
 
-
-		for (int i=0;i<ll;i++){
-
-
-//			int min=h.hashCode(dados.get());
-			for(int l=1;l<dados.values().size();l++){
-
-
-
-			}
-
-
 		}
 
 
+	public void addElements(String user,ArrayList<String> key){
+
+
+		if(this.dados.containsKey(user)) {
+			this.dados.get(user).addAll(key);
+		}
+		else {
+			this.dados.put(user, new ArrayList<>());
+			this.dados.get(user).addAll(key);
+		}
+		minHash();
+	}
+
+
+	public  void PrintSignatures(){
+
+		for(int i=0;i<this.signatures.length;i++){
+			System.out.printf("user%d\t",i);
+			for (int j=0;j<10;j++){
+
+				System.out.printf("%5d ",this.signatures[i][j]);
+			}
+			System.out.println();
+		}
+	}
+
+
+	public double Similaridade(int user1,int user2){
+
+		double sim;
+		double cont=0;
+
+		for(int i=0;i<this.k;i++){
+
+			if(this.signatures[user1][i]==this.signatures[user2][i]){
+				cont++;
+
+			}
+		}
+		sim=cont/this.k;
+		return sim;
 	}
 
 	public int[][] getSignatures() {
