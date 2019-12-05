@@ -15,26 +15,42 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 public class TestMinHash {
 
-	static Map<String, ArrayList<String>> tabela = new Hashtable<>();
+	static HashMap<String, ArrayList<String>> tabela = new HashMap<>();
 	
     public static void main(String[] args) throws IOException {
     	
     	readDB("bd.txt");
     	
 		HashMap<String, ArrayList<String>> dados;
-		dados= readFile("tags.csv");
-		ArrayList<String>s = tabela.get("UserA");
-		minHash m=new minHash(10,dados);
+		dados=tabela;
+		ArrayList<String>sA = tabela.get("UserA");
+		ArrayList<String>sB = tabela.get("UserB");
+		ArrayList<String>sC = tabela.get("UserC");
+		ArrayList<String>sD = tabela.get("UserD");
+		ArrayList<String>sE = tabela.get("UserE");
+		ArrayList<String>sF = tabela.get("UserF");
+		minHash m=new minHash(10000,dados);
 		m.PrintSignatures();
-		System.out.printf("-----------------------------------------------\n");
-		m.addElements("7",s);
+		System.out.printf("---------------------------------------------------\n");
 		m.PrintSignatures();
-		double sim=m.Similaridade(0,1);
-		System.out.printf("A similaridade é de: %f\n",sim);
+		double simAB=m.Similaridade(0,1); // similaridade entre o user na posição 0 (UserA) e o user na posição 1 (UserB)
+		System.out.printf("A similaridade entre o UserA e o UserB é de: %f\n",simAB);
+		System.out.println("Itens do UserA \t" + sA);
+		System.out.println("Itens do UserB \t" + sB + "\n");
+
+		double simCD=m.Similaridade(2,3); // similaridade entre o user na posição 2 (UserC) e o user na posição 3 (UserD)
+		System.out.printf("A similaridade entre o UserC e o UserD é de: %f\n",simCD);
+		System.out.println("Itens do UserC \t" + sC);
+		System.out.println("Itens do UserD \t" + sD + "\n");
+		
+		double simEF=m.Similaridade(4,5); // similaridade entre o user na posição 4 (UserE) e o user na posição 5 (UserF)
+		System.out.printf("A similaridade entre o UserE e o UserF é de: %f\n",simEF);
+		System.out.println("Itens do UserE \t" + sE);
+		System.out.println("Itens do UserF \t" + sF + "\n");
     }
 
 
-    public static  HashMap<String, ArrayList<String>> readFile(String fileName){
+    /*public static  HashMap<String, ArrayList<String>> readFile(String fileName){
     	HashMap<String, ArrayList<String>> d =new HashMap<>();
 	    try {
 	        String s;
@@ -60,7 +76,7 @@ public class TestMinHash {
 	        e.printStackTrace();
 	    }
 	    return d;						
-    }
+    }*/
 	public static void readDB(String filename) throws IOException {
 	    Path currentRelativePath = Paths.get("");
 	    String s = currentRelativePath.toAbsolutePath().toString();

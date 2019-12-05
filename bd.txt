@@ -1,18 +1,60 @@
-UserA->Banana
+UserA->Abacaxi
 UserB->Abacaxi
 UserC->Corvina
 UserD->Bacalhau
-UserE->Ariel A+
+UserE->Pescada
 UserF->Bife Traseiro
 UserA->Limão
-UserB->Melão
+UserB->Limão
 UserC->Alho Francês
 UserD->Feijão
 UserE->Miolo de Nós
 UserF->Bola de Carne
 UserA->Tâmaros
-UserB->Bolo de Arroz
+UserB->Tâmaros
 UserC->Bolo Red Velvet
 UserD->Damascos
-UserE->Bife Traseiro
+UserE->Ariel A+
 UserF->Ariel A+
+UserA->Danoninhos
+UserB->Pescada
+UserC->Bacalhau
+UserD->Feijão
+UserE->Açúcar
+UserF->Ketchup
+UserA->Maionese
+UserB->Álcool
+UserC->Fraldas
+UserD->Lenços
+UserE->Café
+UserF->Lâmpada
+UserA->Farinha
+UserB->Leite
+UserC->Milho
+UserD->Shampoo
+UserE->Fio Dental
+UserF->Linguiça
+UserA->Óleo
+UserB->Sabonete
+UserC->Vinagre
+UserD->Azeite
+UserE->Cotonetes
+UserF->Maionese
+UserA->Leite
+UserB->Pimentão
+UserC->Cenoura
+UserD->Linguiça
+UserE->Lâmpada
+UserF->Pepino
+UserA->Cebola
+UserB->Vinagre
+UserC->Azeite
+UserD->Morango
+UserE->Melancia
+UserF->Melancia
+UserA->Alho Francês
+UserB->Azeite
+UserC->Creme
+UserD->Morango
+UserE->Laranja
+UserF->Laranja

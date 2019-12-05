@@ -6,13 +6,6 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class minHash {
-//	public int hashFunction(String a, int m) {
-//		int soma=0;
-//		for(int i=0; i<a.length(); i++) {
-//			int value=a.charAt(i);
-//			soma+=value;
-//		}
-//		return (soma*
 	private int k;// numero de hash functions
 	private HashFunction h;// hashfunction
 	private int[][] signatures;// assinaturas
@@ -42,16 +35,13 @@ public class minHash {
 		int[]hk;
 		int user=0;
 
-
 		Iterator<Map.Entry<String, ArrayList<String>>> itr=dados.entrySet().iterator();
 		while(itr.hasNext()){
-
-				signatures[user]=h.minHashode(itr.next().getValue());
-
+			signatures[user]=h.minHashode(itr.next().getValue());
 			user++;
 		}
 
-		}
+	}
 
 
 	public void addElements(String user,ArrayList<String> key){
@@ -70,7 +60,7 @@ public class minHash {
 
 		for(int i=0;i<this.signatures.length;i++){
 			System.out.printf("user%d\t",i);
-			for (int j=0;j<10;j++){
+			for (int j=0;j<this.k;j++){
 
 				System.out.printf("%5d ",this.signatures[i][j]);
 			}
@@ -80,18 +70,22 @@ public class minHash {
 
 
 	public double Similaridade(int user1,int user2){
-
+		double tamanho;
 		double sim;
 		double cont=0;
-
+		ArrayList<Integer> uniao = new ArrayList<>();
 		for(int i=0;i<this.k;i++){
-
 			if(this.signatures[user1][i]==this.signatures[user2][i]){
 				cont++;
-
 			}
+			if(!uniao.contains(this.signatures[user1][i]))
+				uniao.add(this.signatures[user1][i]);
+			if(!uniao.contains(this.signatures[user2][i]))
+				uniao.add(this.signatures[user2][i]);
+				
 		}
-		sim=cont/this.k;
+		tamanho=uniao.size();
+		sim=cont/(tamanho);
 		return sim;
 	}
 
