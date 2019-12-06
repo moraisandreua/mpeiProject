@@ -1,0 +1,9 @@
+userB,Abacaxi
+userB,corvina
+userA,bacalhau
+userA,Abacaxi
+userB,Limão
+userB,Café
+userA,Ketchup
+userB,bacalhau
+userA,farinha
