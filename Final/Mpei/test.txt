@@ -1,0 +1,45 @@
+userB,Abacaxi
+userB,corvina
+userA,bacalhau
+userA,Abacaxi
+userB,Limão
+userB,Café
+userA,Ketchup
+userB,bacalhau
+userA,farinha
+userA,Danoninhos
+userB,banana
+userC,cafeina
+userD,ligaduras
+userE,juice
+userF,yogurte
+userA,Caramelo
+userB,Proteina
+userC,Batatas
+userD,Leite
+userE,atum
+userF,carne picada
+userA,Coca Cola
+userB,Caramelho
+userC,7up
+userD,Bifes
+userE,Leite
+userF,Laranjas
+userA,Frango
+userB,Rissois
+userC,Pimentos
+userD,Traseiro
+userE,Caramelo
+userF,Maminha
+userA,Fraldas
+userB,Frango
+userC,Tiramissu
+userD,Leitao
+userE,After Shave
+userF,Agua
+userA,Leitao
+userB,Pantene
+userC,Comida de Gato
+userD,HS
+userE,Agua
+userF,Bebidas
